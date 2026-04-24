@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AAC Best Practices — Staff Resources | Rialto Unified School District</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #1A5294;
+    --navy-dark:   #0d3a6e;
+    --navy-deep:   #072F77;
+    --navy-light:  #e8f0fb;
+    --gold:        #c89211;
+    --gold-light:  #f5e8c8;
+    --gold-pale:   #fdf7e8;
+    --cream:       #faf6ec;
+    --paper:       #fcfaf5;
+    --white:       #ffffff;
+    --ink:         #1a1d24;
+    --ink-mid:     #4a5568;
+    --ink-muted:   #6b7584;
+    --rule:        #e4dfd2;
+    --rule-soft:   #efeadb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .ribbon {
+    background: var(--navy-deep);
+    color: rgba(255,255,255,0.85);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 8px 20px;
+    font-weight: 600;
+  }
+  .ribbon span { color: var(--gold-light); }
+
+  header {
+    background: rgba(252, 250, 245, 0.92);
+    border-bottom: 1px solid var(--rule);
+    padding: 20px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .header-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand-mark {
+    width: 44px; height: 44px;
+    background: var(--navy); color: white;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-weight: 700; font-size: 20px;
+    letter-spacing: -0.5px; flex-shrink: 0; position: relative;
+  }
+  .brand-mark::after {
+    content: ''; position: absolute;
+    bottom: -3px; right: -3px;
+    width: 12px; height: 12px;
+    background: var(--gold); border-radius: 2px;
+  }
+  .brand-text { line-height: 1.2; }
+  .brand-title { font-family: 'Fraunces', serif; font-weight: 600; font-size: 16px; color: var(--ink); letter-spacing: -0.2px; }
+  .brand-sub { font-size: 11px; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 1.2px; font-weight: 500; margin-top: 2px; }
+  .header-nav { display: flex; gap: 24px; align-items: center; }
+  .header-nav a { color: var(--ink-mid); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.2px; transition: color 0.2s; }
+  .header-nav a:hover { color: var(--navy); }
+  @media (max-width: 780px) { .header-nav { display: none; } }
+
+  .hero { padding: 80px 24px 60px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(200, 146, 17, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(26, 82, 148, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 860px; margin: 0 auto; position: relative; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
+    font-weight: 600; color: var(--gold); margin-bottom: 24px;
+  }
+  .hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
+  .hero h1 {
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: clamp(36px, 5.5vw, 56px); line-height: 1.05;
+    color: var(--ink); letter-spacing: -1.5px; margin-bottom: 24px;
+  }
+  .hero h1 em { font-style: italic; color: var(--navy); font-weight: 400; }
+  .hero-lede { font-size: 18px; line-height: 1.6; color: var(--ink-mid); max-width: 640px; margin-bottom: 36px; }
+  .hero-meta { display: flex; gap: 32px; padding-top: 24px; border-top: 1px solid var(--rule); flex-wrap: wrap; }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .hero-meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--ink-muted); font-weight: 600; }
+  .hero-meta-value { font-family: 'Fraunces', serif; font-size: 15px; color: var(--ink); font-weight: 500; }
+
+  section { padding: 64px 24px; position: relative; }
+  .section-inner { max-width: 860px; margin: 0 auto; }
+  .section-label {
+    font-family: 'Fraunces', serif; font-size: 13px; font-weight: 600;
+    color: var(--gold); letter-spacing: 0.5px; margin-bottom: 8px;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .section-label::before { content: attr(data-num); font-size: 11px; color: var(--ink-muted); font-weight: 500; letter-spacing: 1px; }
+  h2 {
+    font-family: 'Fraunces', serif; font-weight: 500;
+    font-size: clamp(28px, 3.8vw, 38px); line-height: 1.15;
+    color: var(--ink); letter-spacing: -0.8px; margin-bottom: 20px;
+  }
+  h2 em { font-style: italic; color: var(--navy); }
+  .section-intro { font-size: 17px; color: var(--ink-mid); max-width: 680px; margin-bottom: 44px; line-height: 1.65; }
+
+  .what-is { background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .definition-card {
+    background: var(--white); border: 1px solid var(--rule);
+    padding: 40px 44px; border-radius: 2px; position: relative;
+  }
+  .definition-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 60px; background: var(--gold); }
+  .definition-card p { font-size: 16px; line-height: 1.7; color: var(--ink); margin-bottom: 14px; }
+  .definition-card p:last-child { margin-bottom: 0; }
+  .definition-card strong { color: var(--navy-deep); font-weight: 600; }
+
+  /* Quick Guides grid */
+  .onepagers { background: var(--paper); }
+  .op-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+  .op-card {
+    background: var(--white); border: 1px solid var(--rule);
+    border-radius: 2px; padding: 22px 22px 18px 22px;
+    text-decoration: none; color: inherit;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+  .op-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 100%; height: 3px; background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .op-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(7, 47, 119, 0.08); border-color: var(--gold-light); }
+  .op-card:hover::before { transform: scaleX(1); }
+  .op-num { font-family: 'Fraunces', serif; font-size: 13px; color: var(--gold); font-weight: 600; letter-spacing: 1.2px; margin-bottom: 8px; }
+  .op-title { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.2px; line-height: 1.25; }
+  .op-desc { font-size: 13px; line-height: 1.5; color: var(--ink-mid); flex-grow: 1; margin-bottom: 14px; }
+  .op-download {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
+    color: var(--navy); font-weight: 600;
+    padding-top: 10px; border-top: 1px solid var(--rule-soft);
+  }
+  .op-download-icon { font-size: 13px; transition: transform 0.2s ease; }
+  .op-card:hover .op-download-icon { transform: translateY(2px); }
+
+  /* Tools section styling — similar to onepagers but cream backdrop */
+  .tools { background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .tools .op-card { background: var(--white); }
+
+  /* P2G device section */
+  .device {
+    background: var(--navy-deep);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .device::before {
+    content: ''; position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(200, 146, 17, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .device .section-label { color: var(--gold-light); }
+  .device h2 { color: white; }
+  .device h2 em { color: var(--gold-light); }
+  .device .section-intro { color: rgba(255,255,255,0.75); }
+  .device-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12);
+    padding: 36px; border-radius: 2px;
+    display: grid; grid-template-columns: 1fr auto; gap: 32px;
+    align-items: center; backdrop-filter: blur(8px);
+  }
+  @media (max-width: 640px) { .device-card { grid-template-columns: 1fr; text-align: left; } }
+  .device-card h4 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: white; margin-bottom: 8px; letter-spacing: -0.3px; }
+  .device-card p { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.7); }
+
+  /* Secondary device row for TD Snap and TouchChat */
+  .device-also {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .device-also-label {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gold-light);
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .device-also-label::before {
+    content: 'Also available';
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .device-secondary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 640px) { .device-secondary-grid { grid-template-columns: 1fr; } }
+  .device-secondary-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 20px 22px;
+    border-radius: 2px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    transition: all 0.2s;
+  }
+  .device-secondary-card:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(200, 146, 17, 0.35);
+    transform: translateY(-2px);
+  }
+  .device-secondary-content {
+    flex: 1;
+    min-width: 0;
+  }
+  .device-secondary-name {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 2px;
+    letter-spacing: -0.2px;
+  }
+  .device-secondary-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.4;
+  }
+  .device-secondary-arrow {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--gold-light);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .device-secondary-card:hover .device-secondary-arrow {
+    transform: translateX(3px);
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--gold); color: var(--navy-deep);
+    padding: 14px 28px; border-radius: 2px;
+    font-weight: 600; font-size: 14px; text-decoration: none;
+    letter-spacing: 0.3px; transition: all 0.2s;
+    white-space: nowrap; border: 1px solid var(--gold);
+  }
+  .btn:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-1px); }
+  .btn-arrow { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 400; }
+
+  /* External resources */
+  .resources-section { background: var(--paper); }
+  .resource-list { display: flex; flex-direction: column; gap: 0; }
+  .resource {
+    display: grid; grid-template-columns: 1fr auto; gap: 24px;
+    padding: 28px 0; border-top: 1px solid var(--rule);
+    align-items: start; text-decoration: none; color: inherit;
+    transition: padding-left 0.25s ease; position: relative;
+  }
+  .resource:hover { padding-left: 12px; }
+  .resource::before { content: ''; position: absolute; left: 0; top: 50%; width: 0; height: 1px; background: var(--gold); transition: width 0.25s ease; }
+  .resource:hover::before { width: 8px; }
+  .resource:last-child { border-bottom: 1px solid var(--rule); }
+  .resource-content h3 { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.2px; }
+  .resource-source { font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
+  .resource-content p { font-size: 14px; line-height: 1.6; color: var(--ink-mid); max-width: 560px; }
+  .resource-arrow { font-family: 'Fraunces', serif; font-size: 24px; color: var(--navy); font-weight: 400; transition: transform 0.25s ease; margin-top: 4px; }
+  .resource:hover .resource-arrow { transform: translateX(6px); }
+
+  /* Question form */
+  .form-section { background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .form-card {
+    background: var(--white); border: 1px solid var(--rule);
+    padding: 40px 44px; border-radius: 2px;
+    display: grid; grid-template-columns: 1fr auto; gap: 32px;
+    align-items: center; position: relative;
+  }
+  .form-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--gold); }
+  @media (max-width: 640px) { .form-card { grid-template-columns: 1fr; padding: 32px; } }
+  .form-card h4 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.3px; }
+  .form-card p { font-size: 14px; line-height: 1.6; color: var(--ink-mid); max-width: 480px; }
+  .btn-navy {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--navy); color: white;
+    padding: 14px 28px; border-radius: 2px;
+    font-weight: 600; font-size: 14px; text-decoration: none;
+    letter-spacing: 0.3px; transition: all 0.2s;
+    white-space: nowrap; border: 1px solid var(--navy);
+  }
+  .btn-navy:hover { background: var(--navy-deep); border-color: var(--navy-deep); transform: translateY(-1px); }
+
+  /* Contact */
+  .contact { background: var(--paper); }
+  .contact-card {
+    background: var(--white); border: 1px solid var(--rule);
+    padding: 40px 44px; border-radius: 2px;
+    display: grid; grid-template-columns: auto 1fr; gap: 32px;
+    align-items: center;
+  }
+  @media (max-width: 640px) { .contact-card { grid-template-columns: 1fr; padding: 32px; } }
+  .contact-portrait {
+    width: 88px; height: 88px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-size: 34px; font-weight: 500;
+    color: var(--gold-light);
+    position: relative; flex-shrink: 0;
+  }
+  .contact-portrait::after { content: ''; position: absolute; inset: -4px; border: 1px solid var(--gold); border-radius: 50%; opacity: 0.4; }
+  .contact-info .contact-role { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); font-weight: 600; margin-bottom: 6px; }
+  .contact-info h4 { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; color: var(--ink); margin-bottom: 4px; letter-spacing: -0.3px; }
+  .contact-info .contact-title { font-size: 14px; color: var(--ink-mid); margin-bottom: 14px; font-style: italic; }
+  .contact-email {
+    font-family: 'Fraunces', serif; font-size: 15px; color: var(--navy);
+    font-weight: 500; text-decoration: none;
+    border-bottom: 1px solid var(--gold); padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+  .contact-email:hover { color: var(--navy-deep); }
+
+  footer { background: var(--navy-deep); color: rgba(255,255,255,0.7); padding: 40px 24px; text-align: center; }
+  .footer-inner { max-width: 860px; margin: 0 auto; }
+  .footer-mark { font-family: 'Fraunces', serif; font-size: 16px; color: var(--gold-light); font-weight: 500; margin-bottom: 10px; letter-spacing: 0.2px; }
+  .footer-text { font-size: 12px; letter-spacing: 0.3px; color: rgba(255,255,255,0.55); }
+  .footer-text em { color: var(--gold-light); font-style: italic; font-family: 'Fraunces', serif; }
+
+  .hero-eyebrow, .hero h1, .hero-lede, .hero-meta { animation: fadeUp 0.8s ease-out backwards; }
+  .hero-eyebrow { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.25s; }
+  .hero-lede { animation-delay: 0.4s; }
+  .hero-meta { animation-delay: 0.55s; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+  <div class="ribbon">
+    Rialto Unified School District · <span>Professional Development Resources</span>
+  </div>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div class="brand-text">
+          <div class="brand-title">AAC Best Practices</div>
+          <div class="brand-sub">Staff Resources · RUSD</div>
+        </div>
+      </div>
+      <nav class="header-nav">
+        <a href="#about">About</a>
+        <a href="#guides">Guides</a>
+        <a href="#tools">Tools</a>
+        <a href="#device">Device</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">For Special Education Staff</div>
+      <h1>
+        The team around a student <em>is the intervention.</em>
+      </h1>
+      <p class="hero-lede">
+        You already know what AAC is. You already work with students who use
+        devices every day. The goal of this page is not to introduce. It is
+        to sharpen. To make sure that every adult on your team, from the
+        lead teacher to the 1:1 aide, is pulling in the same direction for
+        the students who need a voice.
+      </p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Audience</span>
+          <span class="hero-meta-value">ESN &amp; MMSN Teachers and Aides</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Presenter</span>
+          <span class="hero-meta-value">Jerry Butanda, M.S.-SLP</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Role</span>
+          <span class="hero-meta-value">Speech-Language Pathologist, RUSD</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="what-is" id="about">
+    <div class="section-inner">
+      <div class="section-label" data-num="01">Why This Page Exists</div>
+      <h2>Not an introduction. <em>A sharpening.</em></h2>
+      <p class="section-intro">
+        In specialized classrooms, the question is rarely "what is AAC." The
+        question is "why is it not working the way we hoped," or "how do I
+        get my team pulling together," or "we have been at this for years,
+        now what." This page is for those questions.
+      </p>
+      <div class="definition-card">
+        <p>
+          The evidence on AAC has been clear for years.
+          <strong>Communication is a right, not a privilege earned through
+          readiness.</strong> What the evidence also shows, and what does not
+          get enough attention, is that the team around a student is the
+          single most important variable in whether that right becomes a
+          lived experience. Not the device. Not the vocabulary set. The
+          adults.
+        </p>
+        <p>
+          Consistency across that team is the lever. Frequency of modeling,
+          shared expectations, clear communication about what is working and
+          what is not. Those are the things that move students. The
+          resources below are the practical pieces of that work.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="onepagers" id="guides">
+    <div class="section-inner">
+      <div class="section-label" data-num="02">Quick Guides</div>
+      <h2>Five one-pagers <em>worth printing.</em></h2>
+      <p class="section-intro">
+        Each of these is built for your classroom. Download, print, keep
+        them in a binder or share them with your aides. They cover the
+        practical work of making AAC consistent, effective, and sustainable
+        in a specialized setting.
+      </p>
+      <div class="op-grid">
+
+        <a href="01_Consistency_Across_Your_Team.pdf" class="op-card" target="_blank">
+          <div class="op-num">01</div>
+          <div class="op-title">Consistency Across Your Team</div>
+          <div class="op-desc">
+            How teachers and aides pull in the same direction. Morning
+            huddles, peer observation, and coaching aides without making
+            it awkward.
+          </div>
+          <div class="op-download">
+            <span>Download PDF</span>
+            <span class="op-download-icon">↓</span>
+          </div>
+        </a>
+
+        <a href="02_Modeling_at_the_Right_Level.pdf" class="op-card" target="_blank">
+          <div class="op-num">02</div>
+          <div class="op-title">Modeling at the Right Level</div>
+          <div class="op-desc">
+            The plus-one rule, and scripts for every part of the day. Circle
+            time, centers, meals, community-based instruction, and free play.
+          </div>
+          <div class="op-download">
+            <span>Download PDF</span>
+            <span class="op-download-icon">↓</span>
+          </div>
+        </a>
+
+        <a href="03_Editing_Your_Students_Device.pdf" class="op-card" target="_blank">
+          <div class="op-num">03</div>
+          <div class="op-title">Editing Your Student's Device</div>
+          <div class="op-desc">
+            You are empowered to edit and add to your students' devices.
+            Here is how to do it well, together, without creating chaos.
+          </div>
+          <div class="op-download">
+            <span>Download PDF</span>
+            <span class="op-download-icon">↓</span>
+          </div>
+        </a>
+
+        <a href="04_When_the_Device_Is_Not_Working.pdf" class="op-card" target="_blank">
+          <div class="op-num">04</div>
+          <div class="op-title">When the Device Is Not Working</div>
+          <div class="op-desc">
+            The hard cases. Behavior with the device, students who have had
+            AAC for years without progress, and what to try when you feel
+            stuck.
+          </div>
+          <div class="op-download">
+            <span>Download PDF</span>
+            <span class="op-download-icon">↓</span>
+          </div>
+        </a>
+
+        <a href="05_Working_Together.pdf" class="op-card" target="_blank">
+          <div class="op-num">05</div>
+          <div class="op-title">Working Together</div>
+          <div class="op-desc">
+            Who does what across the team. Your role, the site SLP's role,
+            when to contact me, and how to use the staff question form.
+          </div>
+          <div class="op-download">
+            <span>Download PDF</span>
+            <span class="op-download-icon">↓</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="tools" id="tools">
+    <div class="section-inner">
+      <div class="section-label" data-num="03">Tools &amp; References</div>
+      <h2>Five more <em>to keep close.</em></h2>
+      <p class="section-intro">
+        The guides are for reading. These are for doing. Year-long focus
+        calendars, trackers you fill out at team meetings, and modeling
+        reference cards you actually use in the moment.
+      </p>
+      <div class="op-grid">
+
+        <a href="06_A_Year_of_AAC_Focus.pdf" class="op-card" target="_blank">
+          <div class="op-num">06</div>
+          <div class="op-title">A Year of AAC Focus</div>
+          <div class="op-desc">
+            A monthly calendar of team priorities from August through May.
+            One focus area per month. A shared rhythm for your team to
+            rally around.
+          </div>
+          <div class="op-download">
+            <span>Download PDF</span>
+            <span class="op-download-icon">↓</span>
+          </div>
+        </a>
+
+        <a href="07_Weekly_Access_Tracker.pdf" class="op-card" target="_blank">
+          <div class="op-num">07</div>
+          <div class="op-title">Weekly Access Tracker</div>
+          <div class="op-desc">
+            A five-minute weekly snapshot of when a student's device was
+            actually available and actually used. Bring it to team meetings
+            to see patterns.
+          </div>
+          <div class="op-download">
+            <span>Download PDF</span>
+            <span class="op-download-icon">↓</span>
+          </div>
+        </a>
+
+        <a href="08_Communication_Functions_Tracker.pdf" class="op-card" target="_blank">
+          <div class="op-num">08</div>
+          <div class="op-title">Communication Functions Tracker</div>
+          <div class="op-desc">
+            Nine functions a student might reach for with their device.
+            Track what they are using and what the team is not modeling
+            enough.
+          </div>
+          <div class="op-download">
+            <span>Download PDF</span>
+            <span class="op-download-icon">↓</span>
+          </div>
+        </a>
+
+        <a href="09_Model_One_Step_Ahead.pdf" class="op-card" target="_blank">
+          <div class="op-num">09</div>
+          <div class="op-title">Model One Step Ahead</div>
+          <div class="op-desc">
+            A reference card for the plus-one rule. When to push up, when
+            to hold steady, and the two most common mistakes teams make
+            with modeling level.
+          </div>
+          <div class="op-download">
+            <span>Download PDF</span>
+            <span class="op-download-icon">↓</span>
+          </div>
+        </a>
+
+        <a href="10_Any_Activity_Modeling_Guide.pdf" class="op-card" target="_blank">
+          <div class="op-num">10</div>
+          <div class="op-title">Any Activity Is a Language Lesson</div>
+          <div class="op-desc">
+            Four activity archetypes and the modeling targets that fit each.
+            Find the communication opportunities hiding in activities you
+            already do.
+          </div>
+          <div class="op-download">
+            <span>Download PDF</span>
+            <span class="op-download-icon">↓</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="device" id="device">
+    <div class="section-inner">
+      <div class="section-label" data-num="04">Device How-To</div>
+      <h2>The Proloquo2Go <em>Basics.</em></h2>
+      <p class="section-intro">
+        Proloquo2Go is the AAC app you will see most often across RUSD
+        classrooms. This reference is a tap-through guide to the functions
+        you will actually use. Each QR code on the printed sheet links to a
+        short tutorial video.
+      </p>
+      <div class="device-card">
+        <div>
+          <h4>Basics for Proloquo2Go</h4>
+          <p>
+            Overview, editing buttons, adding buttons and folders, hiding
+            buttons, using the word finder, and progressive vocabulary. Print
+            it, laminate it, keep it nearby.
+          </p>
+        </div>
+        <a href="Basics_for_Proloquo2Go.pdf" class="btn" target="_blank" rel="noopener">
+          Download <span class="btn-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="device-also">
+        <div class="device-also-label"></div>
+        <div class="device-secondary-grid">
+          <a href="Basics_for_TD_Snap.pdf" class="device-secondary-card" target="_blank" rel="noopener">
+            <div class="device-secondary-content">
+              <div class="device-secondary-name">Basics for TD Snap</div>
+              <div class="device-secondary-desc">For teams whose students currently use TD Snap.</div>
+            </div>
+            <span class="device-secondary-arrow">↓</span>
+          </a>
+          <a href="Basics_for_TouchChat.pdf" class="device-secondary-card" target="_blank" rel="noopener">
+            <div class="device-secondary-content">
+              <div class="device-secondary-name">Basics for TouchChat</div>
+              <div class="device-secondary-desc">For teams whose students currently use TouchChat.</div>
+            </div>
+            <span class="device-secondary-arrow">↓</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="resources-section">
+    <div class="section-inner">
+      <div class="section-label" data-num="05">Go Deeper</div>
+      <h2>External resources <em>worth your time.</em></h2>
+      <p class="section-intro">
+        These are the sources worth returning to when you have time for
+        deeper reading. All are free, all are appropriate for specialized
+        settings, and several are worth sharing directly with your aides
+        and paraprofessionals.
+      </p>
+      <div class="resource-list">
+        <a href="https://www.project-core.com/" class="resource" target="_blank" rel="noopener">
+          <div class="resource-content">
+            <div class="resource-source">University of North Carolina</div>
+            <h3>Project Core</h3>
+            <p>
+              Free, evidence-based professional development modules and
+              universal core vocabulary boards designed for school
+              implementation. Written for classroom teams, not just
+              specialists.
+            </p>
+          </div>
+          <div class="resource-arrow">→</div>
+        </a>
+        <a href="https://praacticalaac.org/" class="resource" target="_blank" rel="noopener">
+          <div class="resource-content">
+            <div class="resource-source">Blog &amp; Practitioner Resources</div>
+            <h3>PrAACtical AAC</h3>
+            <p>
+              A long-running, practitioner-friendly blog with short posts on
+              almost any AAC topic you can think of. Searchable and
+              consistently useful for day-to-day classroom questions.
+            </p>
+          </div>
+          <div class="resource-arrow">→</div>
+        </a>
+        <a href="https://www.assistiveware.com/learn-aac" class="resource" target="_blank" rel="noopener">
+          <div class="resource-content">
+            <div class="resource-source">AssistiveWare</div>
+            <h3>Core Word Classroom &amp; Learn AAC</h3>
+            <p>
+              Free printable core boards, short instructional videos, and
+              implementation guides aimed squarely at teachers and support
+              staff. Very digestible, no background required.
+            </p>
+          </div>
+          <div class="resource-arrow">→</div>
+        </a>
+        <a href="https://communicationfirst.org/" class="resource" target="_blank" rel="noopener">
+          <div class="resource-content">
+            <div class="resource-source">CommunicationFIRST</div>
+            <h3>LISTEN &amp; Advocacy Resources</h3>
+            <p>
+              A disability-rights organization led by AAC users. Their seven
+              minute short film LISTEN is one of the most effective
+              introductions to presuming competence that exists.
+            </p>
+          </div>
+          <div class="resource-arrow">→</div>
+        </a>
+        <a href="https://www.asha.org/njc/communication-bill-of-rights/" class="resource" target="_blank" rel="noopener">
+          <div class="resource-content">
+            <div class="resource-source">National Joint Committee · ASHA</div>
+            <h3>Communication Bill of Rights</h3>
+            <p>
+              The fifteen fundamental rights that frame everything we do in
+              AAC. One page, worth reading once a year, worth posting in
+              every classroom that serves a student who uses AAC.
+            </p>
+          </div>
+          <div class="resource-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <div class="section-inner">
+      <div class="section-label" data-num="06">Ask</div>
+      <h2>Have a question? <em>Send it.</em></h2>
+      <p class="section-intro">
+        For general AAC questions that are not urgent and not
+        student-specific, submit through the form. Common questions get
+        compiled into follow-up resources so the whole team benefits. For
+        time-sensitive or student-specific questions, email your site SLP
+        first.
+      </p>
+      <div class="form-card">
+        <div>
+          <h4>Staff AAC Question Form</h4>
+          <p>
+            Anonymous by default. Responses go out periodically through your
+            site SLP.
+          </p>
+        </div>
+        <a href="#" class="btn-navy" target="_blank" rel="noopener" id="form-link">
+          Open Form <span class="btn-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="section-inner">
+      <div class="section-label" data-num="07">Contact</div>
+      <h2>You are not <em>on your own.</em></h2>
+      <p class="section-intro">
+        Start with the Speech-Language Pathologist at your school. They are
+        your first point of contact for device issues, student-specific
+        questions, and day-to-day coaching. If your site SLP loops me in or
+        you have a question that falls outside their scope, feel free to
+        reach out directly.
+      </p>
+      <div class="contact-card">
+        <div class="contact-portrait">JB</div>
+        <div class="contact-info">
+          <div class="contact-role">Speech-Language Pathologist</div>
+          <h4>Jerry Butanda, M.S.-SLP, ATAC, AAC</h4>
+          <div class="contact-title">Rialto Unified School District</div>
+          <a href="mailto:jbutanda@rialtousd.org" class="contact-email">jbutanda@rialtousd.org</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-mark">Rialto Unified School District</div>
+      <div class="footer-text">
+        AAC Best Practices · Staff Resources · <em>2026</em>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
